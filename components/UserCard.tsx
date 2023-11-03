@@ -15,7 +15,7 @@ function UserCard({ id, name, job_title, img, sex, onView }: UserCardProps) {
 
   return (
     <div
-      className="p-7 flex justify-between group relative rounded-lg hover:bg-slate-50 bg-white cursor-pointer transition-all ease-in-out delay-50"
+      className="p-7 flex justify-between group relative rounded-lg border border-gray-50 hover:bg-slate-50 shadow cursor-pointer transition-all ease-in-out delay-50"
       onClick={() => onView(id)}
     >
       <div className="flex gap-3 items-center justify-start">
