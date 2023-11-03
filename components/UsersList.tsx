@@ -2,12 +2,12 @@
 
 import React, { useEffect, useMemo, useState } from "react";
 import UserCard from "./UserCard";
-import { GithubService, GithubUser } from "@/helpers/github";
+import { GithubUser } from "@/helpers/github";
 import NewUserModal from "./NewUserModal";
+import userData from "../mock/user_data.json";
 
 function UsersList() {
-  const { getAllUsers } = new GithubService();
-  const [users, setUsers] = useState<GithubUser[]>([]);
+  const [users, setUsers] = useState<GithubUser[]>(userData);
   const [userModal, setUserModal] = useState({
     open: false,
     user: {} as GithubUser,
@@ -15,15 +15,6 @@ function UsersList() {
   const [searchTerm, setSearchTerm] = useState("");
 
   const [viewOnly, setViewOnly] = useState(false);
-
-  const getUsers = async () => {
-    const users = await getAllUsers();
-    setUsers(users);
-  };
-
-  useEffect(() => {
-    getUsers();
-  }, []);
 
   const closeModal = () => {
     setUserModal({
@@ -84,9 +75,9 @@ function UsersList() {
     return users
       .filter((user) => {
         if (!searchTerm) return true;
-        return user.login.toLowerCase().includes(searchTerm.toLowerCase());
+        return user.name.toLowerCase().includes(searchTerm.toLowerCase());
       })
-      .sort((a, b) => (a.login.toLowerCase() > b.login.toLowerCase() ? 1 : -1))
+      .sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1))
       .map((user) => <UserCard {...user} key={user.id} onView={onView} />);
   }, [users, searchTerm]);
 

@@ -8,12 +8,12 @@ interface NewUserFormProps {
   viewOnly?: boolean;
 }
 
-const initialState = {
-  avatar_url: "",
+const initialState: GithubUser = {
+  img: "",
+  job_title: "",
+  name: "",
   id: 0,
-  login: "",
-  node_id: "",
-  type: "",
+  sex: "",
 };
 
 function NewUserForm({ onSubmit, data, viewOnly = false }: NewUserFormProps) {
@@ -43,24 +43,16 @@ function NewUserForm({ onSubmit, data, viewOnly = false }: NewUserFormProps) {
   return (
     <div>
       <TextField
-        label="User Name"
-        value={formData.login}
-        name="login"
-        placeholder="Enter your username"
-        onChange={handleChange}
-        disabled={viewOnly}
-      />
-      <TextField
-        label="Node ID"
-        value={formData.node_id}
+        label="Full Name"
+        value={formData.name}
         name="node_id"
         placeholder="Enter your node id"
         onChange={handleChange}
         disabled={viewOnly}
       />
       <TextField
-        label="Type"
-        value={formData.type}
+        label="Job Title"
+        value={formData.job_title}
         onChange={handleChange}
         name="type"
         placeholder="Enter your type"
